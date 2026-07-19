@@ -1,0 +1,9 @@
+{
+  "users": {
+    "admin": {
+      "password_hash": "scrypt:32768:8:1$qU0wx9C5IX9YM0io$e07ec2fe2ce456831e172d83f0321c400f6fe183da9f780dc43086795dfac726bff62e35824ce272dba5509a0bde62007116b1a4f2980c5ef61b743481b87a43",
+      "role": "admin",
+      "quota_mb": 200000
+    }
+  }
+}

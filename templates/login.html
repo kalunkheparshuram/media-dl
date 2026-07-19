@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Media Downloader — Log in</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Rubik:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .login-wrap { width: 100%; max-width: 380px; padding: 20px; }
+  .login-brand { text-align: center; margin-bottom: 18px; }
+  .login-brand .brand-orb { width: 52px; height: 52px; margin: 0 auto 10px; }
+  .login-brand .brand-name { font-size: 1.3rem; display: block; }
+  button[type=submit] { width: 100%; margin-top: 18px; padding: 12px; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+  <div class="aero-bg"></div>
+
+  <div class="login-wrap">
+    <div class="login-brand">
+      <div class="brand-orb"></div>
+      <span class="brand-name">MEDIA DOWNLOADER</span>
+    </div>
+
+    <div class="glass-card">
+      {% if error %}<p class="error">{{ error }}</p>{% endif %}
+      <form method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autofocus required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Log in</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

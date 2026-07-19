@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Files — Media Downloader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Rubik:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="aero-bg"></div>
+
+  <div class="page">
+    <nav class="aero-nav">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-orb"></span>
+        <span class="brand-name">MEDIA DOWNLOADER</span>
+      </a>
+      <div class="nav-links">
+        <span class="nav-user">{{ user.username }} <strong>({{ user.role }})</strong></span>
+        {% if user.role == 'admin' %}<a href="{{ url_for('admin_dashboard') }}">Dashboard</a>{% endif %}
+        <a href="{{ url_for('index') }}">Downloader</a>
+        <a href="{{ url_for('logout') }}">Log out</a>
+      </div>
+    </nav>
+
+    <div class="glass-card">
+      <h1 class="page-title">{{ 'All Users\' Files' if (user.role == 'admin' and not current) else 'My Files' }}</h1>
+      <p class="quota-text">{{ usage_summary }}</p>
+
+      {% if parent is not none %}
+        <p style="margin-top:14px;"><a href="{{ url_for('files', subpath=parent if parent != '.' else '') }}">&larr; .. (up)</a></p>
+      {% endif %}
+
+      <ul class="file-list" style="margin-top:16px;">
+        {% for e in entries %}
+          <li>
+            <div class="file-entry">
+              <span class="file-icon {{ 'dir' if e.is_dir else 'file' }}"></span>
+              <a href="{{ url_for('files', subpath=e.path) }}">{{ e.name }}</a>
+              <span class="size">{{ e.size }}</span>
+            </div>
+            <form method="post" action="{{ url_for('delete_file', subpath=e.path) }}"
+                  onsubmit="return confirm('Delete {{ e.name }}?');">
+              <button type="submit" class="delete-btn">Delete</button>
+            </form>
+          </li>
+        {% else %}
+          <li>Nothing here yet.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

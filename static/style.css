@@ -1,0 +1,579 @@
+/* ============================================================
+   OUTRUN AERO — shared design system
+   80s/90s synthwave grid-horizon + Frutiger Aero glass & chrome
+   ============================================================ */
+
+:root {
+  --sky: #12a0e8;
+  --sky-deep: #0a6fb0;
+  --leaf: #22c55e;
+  --leaf-deep: #14803a;
+  --aqua: #06d6a0;
+  --amber: #ffb100;
+  --rose: #ff4f7e;
+  --text-hi: #063a52;
+  --text-mut: #45707f;
+  --glass: rgba(255, 255, 255, 0.32);
+  --glass-2: rgba(255, 255, 255, 0.48);
+  --glass-border: rgba(255, 255, 255, 0.60);
+  --glass-hi: rgba(255, 255, 255, 0.90);
+
+  --font-display: 'Audiowide', 'Segoe UI', sans-serif;
+  --font-body: 'Rubik', 'Segoe UI', sans-serif;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
+
+  --radius: 18px;
+  --radius-sm: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-hi);
+  background: var(--sky-deep);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ---------------- animated grid-horizon background ---------------- */
+
+.aero-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 68%, rgba(255, 255, 255, 0.35), rgba(6, 214, 160, 0.20) 45%, transparent 70%),
+    linear-gradient(180deg, #0a6fb0 0%, #12a4c9 45%, #1fd18f 100%);
+  overflow: hidden;
+}
+/* glossy sun 
+.aero-bg::before {
+  
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 62%;
+  width: 340px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffffff 0%, var(--aqua) 45%, var(--leaf) 100%);
+  box-shadow: 0 0 120px 20px rgba(6, 214, 160, 0.4);
+  opacity: 0.55;
+  animation: sun-pulse 6s ease-in-out infinite;
+}
+
+@keyframes sun-pulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.65; }
+}
+receding grid 
+.aero-bg::after {
+  
+  content: "";
+  position: absolute;
+  left: -50%;
+  right: -50%;
+  bottom: -10%;
+  height: 60%;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.35) 0, rgba(255, 255, 255, 0.35) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0.25) 1px, transparent 1px, transparent 40px);
+  transform: perspective(300px) rotateX(60deg);
+  transform-origin: bottom;
+  animation: grid-scroll 3.5s linear infinite;
+  mask-image: linear-gradient(180deg, transparent, black 30%);
+  -webkit-mask-image: linear-gradient(180deg, transparent, black 30%);
+}
+
+
+@keyframes grid-scroll {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 0, 0 40px; }
+}*/
+
+/* ---------------- layout shell ---------------- */
+
+.page {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.page.wide { max-width: 900px; }
+
+/* ---------------- brand / nav ---------------- */
+
+.aero-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 18px;
+  margin-bottom: 28px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 30px rgba(6, 60, 90, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  min-width: 0;
+}
+
+/*.brand-orb {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex: none;
+  background: radial-gradient(circle at 35% 30%, #fff 0%, var(--sky) 45%, var(--leaf) 100%);
+  box-shadow: 0 0 14px rgba(6, 214, 160, 0.7), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.brand-orb::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 12px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  filter: blur(1px);
+}*/
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  background: linear-gradient(90deg, var(--sky-deep), var(--leaf-deep));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  flex-wrap: wrap;
+}
+
+.nav-links a, .nav-chip {
+  color: var(--text-hi);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--glass-2);
+  border: 1px solid var(--glass-border);
+  transition: box-shadow 0.2s, transform 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  box-shadow: 0 0 12px rgba(18, 160, 232, 0.5);
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.nav-user {
+  font-size: 0.78rem;
+  color: var(--text-mut);
+  font-family: var(--font-mono);
+}
+
+.nav-user strong { color: var(--sky-deep); }
+
+/* ---------------- glass card ---------------- */
+
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 10px 40px rgba(6, 60, 90, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  /* top specular sheen */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent);
+  pointer-events: none;
+}
+
+h1.page-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  margin: 0 0 18px;
+  color: var(--sky-deep);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+h2.section-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.03em;
+  margin: 0 0 14px;
+  color: var(--leaf-deep);
+}
+
+/* ---------------- forms ---------------- */
+
+label {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-mut);
+  text-transform: uppercase;
+}
+
+input[type=text], input[type=password], input[type=number], select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-hi);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, select:focus {
+  border-color: var(--sky);
+  box-shadow: 0 0 0 3px rgba(18, 160, 232, 0.25);
+}
+
+select { cursor: pointer; }
+
+fieldset {
+  margin-top: 16px;
+  padding: 14px 16px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+legend {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--leaf-deep);
+  padding: 0 8px;
+}
+
+fieldset label {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  font-size: 0.9rem;
+  text-transform: none;
+  font-weight: 500;
+  color: var(--text-hi);
+  cursor: pointer;
+}
+
+input[type=radio], input[type=checkbox] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin: 0 10px 0 0;
+  flex: none;
+  border-radius: 50%;
+  border: 2px solid var(--sky);
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+input[type=checkbox] { border-radius: 5px; }
+
+input[type=radio]:checked, input[type=checkbox]:checked {
+  border-color: var(--sky-deep);
+  background: radial-gradient(circle, var(--sky) 42%, transparent 44%);
+  box-shadow: 0 0 10px rgba(18, 160, 232, 0.7);
+}
+
+input[type=checkbox]:checked {
+  background: var(--sky);
+  box-shadow: 0 0 10px rgba(18, 160, 232, 0.7);
+}
+
+/* ---------------- buttons ---------------- */
+
+button, .btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  color: #06121e;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--sky) 0%, var(--leaf) 100%);
+  box-shadow: 0 6px 20px rgba(6, 214, 160, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+button::before, .btn::before {
+  /* glass highlight streak */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.65), transparent);
+  pointer-events: none;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(6, 214, 160, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+button:active, .btn:active { transform: translateY(0); }
+
+button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+#stop-btn, .btn-danger, button.delete-btn {
+  padding: 12px;
+  width: 100px;
+  color: #2a0410;
+  background: linear-gradient(135deg, var(--rose), #ff8fb0);
+  box-shadow: 0 6px 20px rgba(255, 79, 126, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+button.delete-btn {
+  padding: 5px 14px;
+  font-size: 0.78rem;
+}
+
+ button.danger {
+  color: #2a0410;
+  background: linear-gradient(135deg, var(--rose), #ff8fb0);
+  box-shadow: 0 6px 20px rgba(255, 79, 126, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+ }
+
+/* small ghost buttons used inline in admin table rows */
+td button, td .btn {
+  padding: 6px 14px;
+  font-size: 0.78rem;
+}
+
+/* ---------------- status / progress ---------------- */
+
+#status-row {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+#status {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--leaf-deep);
+  white-space: pre-wrap;
+  word-break: break-word;
+  flex: 1;
+  min-width: 0;
+}
+
+#stop-btn { display: none; }
+
+.error { color: var(--rose); font-family: var(--font-mono); }
+.cancelled { color: var(--amber); font-family: var(--font-mono); }
+
+.quota-bar {
+  position: relative;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.35);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.quota-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sky), var(--leaf));
+  box-shadow: 0 0 10px rgba(6, 214, 160, 0.6);
+  transition: width 0.4s ease;
+}
+
+.quota-fill.warn {
+  background: linear-gradient(90deg, var(--amber), var(--rose));
+  box-shadow: 0 0 10px rgba(255, 79, 126, 0.6);
+}
+
+.quota-text {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-mut);
+}
+
+/* ---------------- file list ---------------- */
+
+ul.file-list { list-style: none; padding: 0; margin: 0; }
+
+ul.file-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  transition: background 0.2s, transform 0.2s;
+}
+
+ul.file-list li:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateX(2px);
+}
+
+.file-entry { display: flex; align-items: center; gap: 10px; min-width: 0; }
+
+.file-icon {
+  flex: none;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+.file-icon.dir { background: radial-gradient(circle at 35% 30%, #fff, var(--leaf)); box-shadow: 0 0 8px rgba(34, 197, 94, 0.7); }
+.file-icon.file { background: radial-gradient(circle at 35% 30%, #fff, var(--sky)); box-shadow: 0 0 8px rgba(18, 160, 232, 0.7); }
+
+ul.file-list a {
+  color: var(--text-hi);
+  text-decoration: none;
+  font-size: 0.92rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+ul.file-list a:hover { color: var(--sky-deep); }
+
+.size {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-mut);
+  flex: none;
+}
+
+/* ---------------- admin table ---------------- */
+
+table.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+table.admin-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--sky-deep);
+  border-bottom: 2px solid rgba(18, 160, 232, 0.4);
+}
+
+table.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--glass-border);
+  vertical-align: middle;
+}
+
+table.admin-table tr:hover td { background: rgba(255, 255, 255, 0.3); }
+
+table.admin-table form { display: inline-block; margin: 2px 4px 2px 0; }
+
+table.admin-table input[type=text], table.admin-table input[type=password], table.admin-table input[type=number] {
+  width: 100px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  margin-top: 0;
+}
+
+/* ---------------- flash messages ---------------- */
+
+.flash {
+  padding: 10px 16px;
+  margin-bottom: 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  color: var(--leaf-deep);
+}
+
+.flash.error {
+  background: rgba(255, 79, 126, 0.14);
+  border-color: rgba(255, 79, 126, 0.5);
+  color: var(--rose);
+  font-family: var(--font-body);
+}
+
+/* ---------------- add-user fieldset (admin) ---------------- */
+
+fieldset.add-user { margin-top: 28px; }
+fieldset.add-user input, fieldset.add-user select { width: auto; display: inline-block; margin: 4px 6px 4px 0; }
+
+/* ---------------- misc ---------------- */
+
+a { color: var(--sky-deep); }
+
+.subtext { font-size: 0.85em; color: var(--text-mut); margin-top: 6px; }
+
+@media (max-width: 560px) {
+  .aero-nav { border-radius: var(--radius); }
+  .glass-card { padding: 20px 16px; }
+  .row { flex-direction: column; }
+}

@@ -1,0 +1,14 @@
+[Unit]
+Description=Media Downloader (yt-dlp web UI)
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/opt/media-dl
+Environment=APP_PASSWORD=changeme
+ExecStart=/opt/media-dl/venv/bin/python /opt/media-dl/app.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

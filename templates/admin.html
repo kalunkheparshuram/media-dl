@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Dashboard — Media Downloader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Rubik:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="aero-bg"></div>
+
+  <div class="page wide">
+    <nav class="aero-nav">
+      <a class="brand" href="{{ url_for('index') }}">
+        <span class="brand-orb"></span>
+        <span class="brand-name">MEDIA DOWNLOADER</span>
+      </a>
+      <div class="nav-links">
+        <span class="nav-user">{{ user.username }} <strong>({{ user.role }})</strong></span>
+        <a href="{{ url_for('index') }}">Downloader</a>
+        <a href="{{ url_for('logout') }}">Log out</a>
+      </div>
+    </nav>
+
+    <div class="glass-card">
+      <h1 class="page-title">Admin Dashboard</h1>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, msg in messages %}
+          <div class="flash {{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+
+      <table class="admin-table">
+        <tr>
+          <th>Username</th><th>Role</th><th>Used</th><th>Quota</th><th>Actions</th>
+        </tr>
+        {% for r in rows %}
+        <tr>
+          <td>{{ r.username }}</td>
+          <td>{{ r.role }}</td>
+          <td>{{ r.used_fmt }}</td>
+          <td>{{ r.quota_fmt }}</td>
+          <td>
+            <form method="post" action="{{ url_for('admin_update_quota', username=r.username) }}">
+              <input type="number" name="quota_mb" value="{{ r.quota_mb }}" min="0" title="MB, 0 = unlimited">
+              <button type="submit">Set quota</button>
+            </form>
+            <form method="post" action="{{ url_for('admin_reset_password', username=r.username) }}">
+              <input type="password" name="password" placeholder="new password">
+              <button type="submit">Reset pw</button>
+            </form>
+            {% if r.username != user.username %}
+            <form method="post" action="{{ url_for('admin_delete_user', username=r.username) }}"
+                  onsubmit="return confirm('Delete user {{ r.username }}? Their files stay on disk.');">
+              <button type="submit" class="danger">&#10008;</button>
+            </form>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+
+      <fieldset class="add-user">
+        <legend>Add new user</legend>
+        <form method="post" action="{{ url_for('admin_create_user') }}">
+          <input type="text" name="username" placeholder="username" required>
+          <input type="password" name="password" placeholder="password" required>
+          <select name="role">
+            <option value="user">user</option>
+            <option value="admin">admin</option>
+          </select>
+          <input type="number" name="quota_mb" placeholder="quota MB" value="1000" min="0" title="0 = unlimited">
+          <button type="submit">Create user</button>
+        </form>
+      </fieldset>
+    </div>
+  </div>
+</body>
+</html>
