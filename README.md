@@ -4,7 +4,7 @@ Small self-hosted Flask app around `yt-dlp` (video/audio) and `gallery-dl`
 (images/galleries) for downloading from various platforms — styled as a
 retro-futuristic "Outrun Aero" glass UI (80s/90s synthwave grid-and-sun
 background, Frutiger Aero-style glossy glass panels and buttons).
-
+![screenshots](https://github.com/kalunkheparshuram/media-dl/blob/main/screenshots/media-dl.png)
 - Video formats: mp4, mkv, webm (with quality cap: 2160/1440/1080/720/480/360/best)
 - Audio formats: mp3, opus, m4a, wav, flac
 - **Images**: Instagram, Facebook, Twitter/X, Pinterest, Reddit, Tumblr, and
